@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base background: Soft, tranquil Bamboo/Porcelain off-white */
+    --background: 60 15% 98%;
+    /* Base text: Deep Teak Brown */
+    --foreground: 30 25% 15%;
+
+    --card: 60 15% 100%;
+    --card-foreground: 30 25% 15%;
+
+    --popover: 60 15% 100%;
+    --popover-foreground: 30 25% 15%;
+
+    /* Primary: Authentic Imperial Red */
+    --primary: 355 75% 45%;
+    --primary-foreground: 60 15% 98%;
+
+    /* Secondary: Soft beige/wood */
+    --secondary: 40 20% 93%;
+    --secondary-foreground: 30 25% 15%;
+
+    /* Muted: Soft taupe */
+    --muted: 40 15% 90%;
+    --muted-foreground: 30 15% 45%;
+
+    /* Accent: Deep Jade Green */
+    --accent: 160 30% 35%;
+    --accent-foreground: 60 15% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 355 75% 45%;
+
+    /* Slightly sharper edges for a cleaner, fine-dining look */
+    --radius: 0.5rem;
+
+    --sidebar-background: 60 15% 96%;
+    --sidebar-foreground: 30 25% 15%;
+    --sidebar-primary: 355 75% 45%;
+    --sidebar-primary-foreground: 60 15% 98%;
+    --sidebar-accent: 40 20% 93%;
+    --sidebar-accent-foreground: 30 25% 15%;
+    --sidebar-border: 40 20% 88%;
+    --sidebar-ring: 355 75% 45%;
+
+    /* Custom China Bowl Colors */
+    --china-red: 355 75% 45%;
+    --china-jade: 160 30% 35%;
+    --china-bamboo: 60 15% 90%;
+    --china-teak: 30 25% 15%;
+    --china-porcelain: 60 15% 98%;
+  }
+
+  .dark {
+    /* Dark Mode: Deep, moody Teak/Charcoal */
+    --background: 30 20% 10%;
+    --foreground: 60 15% 92%;
+    
+    --card: 30 20% 13%;
+    --card-foreground: 60 15% 92%;
+    
+    --popover: 30 20% 13%;
+    --popover-foreground: 60 15% 92%;
+    
+    /* Primary: Muted Imperial Red */
+    --primary: 355 60% 50%;
+    --primary-foreground: 60 15% 98%;
+    
+    --secondary: 30 15% 18%;
+    --secondary-foreground: 60 15% 92%;
+    
+    --muted: 30 15% 18%;
+    --muted-foreground: 30 10% 65%;
+    
+    /* Accent: Soft Jade */
+    --accent: 160 25% 45%;
+    --accent-foreground: 30 20% 10%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 30 15% 22%;
+    --input: 30 15% 22%;
+    --ring: 355 60% 50%;
+    
+    --sidebar-background: 30 20% 10%;
+    --sidebar-foreground: 60 15% 92%;
+    --sidebar-primary: 355 60% 50%;
+    --sidebar-primary-foreground: 60 15% 98%;
+    --sidebar-accent: 30 15% 18%;
+    --sidebar-accent-foreground: 60 15% 92%;
+    --sidebar-border: 30 15% 22%;
+    --sidebar-ring: 355 60% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  ::selection {
+    background: hsl(355 75% 45% / 0.2);
+    color: hsl(30 25% 15%);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(355 75% 45%), hsl(160 30% 35%));
+  }
+  
+  .dark .text-gradient {
+    background-image: linear-gradient(135deg, hsl(355 60% 50%), hsl(160 25% 45%));
+  }
+
+  .bg-grain {
+    position: relative;
+  }
+
+  .bg-grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      180deg,
+      hsl(30 20% 10% / 0.4) 0%,
+      hsl(30 20% 10% / 0.7) 50%,
+      hsl(30 20% 10% / 0.9) 100%
+    );
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(355 75% 45% / 0.3),
+      hsl(160 30% 35% / 0.3),
+      transparent
+    );
+  }
+
+  .glass {
+    backdrop-filter: blur(16px) saturate(180%);
+    background: hsl(var(--card) / 0.9);
+  }
+
+  .card-hover {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -12px hsl(355 75% 45% / 0.12);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
