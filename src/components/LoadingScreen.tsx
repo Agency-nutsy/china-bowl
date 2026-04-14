@@ -37,52 +37,99 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   }, [onComplete]);
 
   return (
-    <motion.div
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
-      style={{
-        background: "linear-gradient(135deg, hsl(5, 50%, 12%) 0%, hsl(8, 65%, 22%) 40%, hsl(35, 60%, 25%) 100%)",
-      }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-    >
-      <motion.h1
-        className="font-display text-5xl sm:text-6xl font-bold mb-8 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <span className="text-[hsl(35,70%,65%)]">Yo</span>
-        <span className="text-[hsl(0,0%,95%)]"> Tibet</span>
-      </motion.h1>
-
+    <AnimatePresence>
       <motion.div
-        className="w-56 sm:w-64 h-1.5 rounded-full overflow-hidden"
-        style={{ background: "hsla(0,0%,100%,0.15)" }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
+        className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050000] overflow-hidden"
+        // Cinematic dark fade exit
+        exit={{ opacity: 0, scale: 0.95, filter: "blur(12px)" }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        <motion.div
-          className="h-full rounded-full"
-          style={{
-            background: "linear-gradient(90deg, hsl(35,70%,55%), hsl(8,65%,50%))",
-          }}
-          initial={{ width: "0%" }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        />
-      </motion.div>
+        {/* Deep Crimson Ambient Glow */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <motion.div
+            className="w-[600px] h-[600px] rounded-full"
+            style={{
+              background: "radial-gradient(circle, rgba(220, 38, 38, 0.08) 0%, rgba(0,0,0,0) 65%)",
+            }}
+            animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
 
-      <motion.p
-        className="mt-4 text-sm tracking-widest uppercase"
-        style={{ color: "hsla(0,0%,100%,0.4)" }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        Authentic Tibetan Kitchen
-      </motion.p>
-    </motion.div>
+        <div className="relative z-10 flex flex-col items-center justify-center">
+          
+          {/* Top Text - Imperial Gold */}
+          <motion.h1
+            className="font-display text-5xl sm:text-7xl font-black tracking-[0.2em] uppercase text-center ml-4"
+            initial={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span 
+              className="text-transparent bg-clip-text"
+              style={{ backgroundImage: "linear-gradient(to bottom, #FDE68A, #F59E0B)" }}
+            >
+              China
+            </span>
+          </motion.h1>
+
+          {/* Slicing Progress Bar */}
+          <div className="flex items-center gap-4 my-6 w-full max-w-sm px-6">
+            <motion.span 
+              className="text-[#F59E0B] text-xs font-mono w-8 text-right"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              {progress}%
+            </motion.span>
+            
+            <motion.div 
+              className="flex-1 h-[2px] bg-[#3f0000] relative overflow-hidden"
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              <motion.div
+                className="absolute top-0 left-0 bottom-0"
+                style={{
+                  background: "linear-gradient(90deg, #F59E0B, #DC2626)",
+                  boxShadow: "0 0 10px rgba(220, 38, 38, 0.8)"
+                }}
+                initial={{ width: "0%" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+            </motion.div>
+          </div>
+
+          {/* Bottom Text - Dragon Red Glow */}
+          <motion.h1
+            className="font-display text-5xl sm:text-7xl font-black tracking-[0.2em] uppercase text-center ml-4"
+            initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span 
+              className="text-[#DC2626]"
+              style={{ textShadow: "0 0 25px rgba(220, 38, 38, 0.5)" }}
+            >
+              Bowl
+            </span>
+          </motion.h1>
+
+          {/* Minimal Tagline */}
+          <motion.p
+            className="mt-12 text-[10px] sm:text-xs tracking-[0.4em] text-zinc-400 font-medium uppercase"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+          >
+            Premium Pan-Asian • Satya Niketan
+          </motion.p>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
